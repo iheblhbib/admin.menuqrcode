@@ -1,0 +1,7 @@
+# Journaux
+error_log
+
+# Divers
+__MACOSX/
+.DS_Store
+Thumbs.db

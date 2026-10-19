@@ -1,0 +1,18 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+ 
+ Options -Indexes
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 201.123.48.208
+deny from 186.79.95.25
+deny from 114.4.221.253
+deny from 52.24.164.127
+deny from 44.239.17.50
+deny from 44.228.63.248
