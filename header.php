@@ -1,16 +1,20 @@
 <?php  
     include('../config.menuqrcode/config.php'); 
+    include_once(__DIR__ . '/securite.php');
     
     $object = new application(); 
      
-    if(!$object->is_login())
+    // seuls les super admins et modérateurs entrent dans l'administration
+    if(!securite_est_admin($object))
     {
         header("location:".$object->admin_url."login");
+        exit();
     }
      
     if(!$object->is_user_actif($_SESSION['id']))
     {
         header("location:".$object->admin_url."logout");
+        exit();
     }
     
     $page_actuel = $object->get_page_url();

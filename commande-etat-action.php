@@ -3,6 +3,9 @@
 include('../config.menuqrcode/config.php');
 
 $object = new application();
+
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
  
 
 if (isset($_POST["action"])) {

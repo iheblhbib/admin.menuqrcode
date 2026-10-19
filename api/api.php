@@ -31,13 +31,10 @@
 
 
 include('../../config.menuqrcode/config.php'); 
+include_once(__DIR__ . '/../securite.php');
 
-// ⚠️ Ajoute ici ta vérification de session / rôle super-admin, par ex. :
-// if (!isset($_SESSION['admin']) || $_SESSION['admin']['role'] !== 'super') {
-//     http_response_code(403);
-//     echo json_encode(['success' => false, 'error' => 'Accès refusé.']);
-//     exit;
-// }
+// réservé aux administrateurs connectés
+securite_exiger_admin(new application());
 
 header('Content-Type: application/json; charset=utf-8');
 

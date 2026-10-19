@@ -720,7 +720,8 @@ $(document).ready(function(){
 	
   	$(document).on('click','.login',function(){
   	    var id = $(this).data('id');  
-        $.redirect("https://app.menuqrcode.tn/redirection-admin-login", {id:id,action:'login-admin'}, "POST", "_blank");    
+        // expire et signature sont générés côté serveur (securite_attributs_connexion)
+        $.redirect("https://app.menuqrcode.tn/redirection-admin-login", {id:id,expire:$(this).data('expire'),signature:$(this).data('signature'),action:'login-admin'}, "POST", "_blank");    
   	})
  
 
