@@ -1,6 +1,9 @@
 <?php include('../../config.menuqrcode/config.php');
 
     $object = new application();
+
+include_once(__DIR__ . '/../securite.php');
+securite_exiger_admin($object);
     
     if (!$object->is_login()) {
         header("location:" . $object->base_url . "");

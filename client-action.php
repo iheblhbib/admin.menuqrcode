@@ -4,6 +4,9 @@ include('../config.menuqrcode/config.php');
 
 $object = new application();
 
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
+
 $page_actuel = $object->get_page_url();
 
 if (isset($_POST["action"])) {   
@@ -90,7 +93,7 @@ if (isset($_POST["action"])) {
 
             } else {
                 
-                $sub_array[] =  '<button style="font-size:x-small"  class="btn btn-primary btn-sm login" name="login" data-id="'.$row['id'].'"><i class="fad fa-sign-in"></i></button>';
+                $sub_array[] =  '<button style="font-size:x-small"  class="btn btn-primary btn-sm login" name="login" data-id="'.$row['id'].'"'.securite_attributs_connexion($row['id']).'><i class="fad fa-sign-in"></i></button>';
                 
                 $statut = ($row["statut"] == 'Activer') ? 'success' : 'danger'; 
     
@@ -196,7 +199,7 @@ if (isset($_POST["action"])) {
 
             } else {
                 
-                $sub_array[] = ' <i class="fad fa-sign-in login" data-id="'.$row['id'].'"></i>'; 
+                $sub_array[] = ' <i class="fad fa-sign-in login" data-id="'.$row['id'].'"'.securite_attributs_connexion($row['id']).'></i>'; 
  
                 $statut = ($row["statut"] == 'Activer') ? 'success' : 'danger'; 
     

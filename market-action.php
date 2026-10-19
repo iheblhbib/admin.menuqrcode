@@ -16,6 +16,9 @@ if (!file_exists($PNG_TEMP_DIR))
 
 $object = new application();
 
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
+
 $page_actuel = $object->get_page_url();
 
 if (isset($_POST["action"])) {   
@@ -126,7 +129,7 @@ if (isset($_POST["action"])) {
             
             $sub_array[] = '<button style="font-size:x-small" type="button" name="statut_button" class="  btn btn-' . $etat . '  btn-sm statut_button"  data-id="' . $row["id"] . '"data-statut="' . $row["statut"] . '">' . $row["statut"] . '</button>';
             
-            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"><i class="fad fa-sign-in"></i></button>';
+            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"'.securite_attributs_connexion($row['gestionnaire'], $row['id']).'><i class="fad fa-sign-in"></i></button>';
 
             $langues = ($row['multi_langue'] == '1') ? '<button style="font-size:x-small" type="button" name="language_button" class="btn  btn-sm   btn-primary  language_button" data-id="'.$row["id"].'"><i class="fad fa-language"></i></button>' : '' ;
             
@@ -232,7 +235,7 @@ if (isset($_POST["action"])) {
 			$sub_array[] = empty($row['qrcode']) ? '' :  '<a href="'.$row["qrcode"].'" class="glightbox" data-glightbox="title: '.$row['market'].';"  ><img src="'.$row["qrcode"].'" alt="image" class="img-fluid img-thumbnail" width="75" height="75"></a>';
 			
             $sub_array[] = '<button style="font-size:x-small" type="button" name="statut_button" class="  btn btn-' . $etat . '  btn-sm statut_button"  data-id="' . $row["id"] . '"data-statut="' . $row["statut"] . '">' . $row["statut"] . '</button>';
-            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"><i class="fad fa-sign-in"></i></button>';
+            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"'.securite_attributs_connexion($row['gestionnaire'], $row['id']).'><i class="fad fa-sign-in"></i></button>';
 
             $langues = ($row['multi_langue'] == '1') ? '<button style="font-size:x-small" type="button" name="language_button" class="btn  btn-sm   btn-primary  language_button" data-id="'.$row["id"].'"><i class="fad fa-language"></i></button>' : '' ;
             $sub_array[] = $langues.'<button style="font-size:x-small" type="button" name="edit_button" class=" btn  btn-warning btn-sm edit_button" data-id="' . $row["id"] . '"><i class="fad fa-edit"></i></button>';
@@ -346,7 +349,7 @@ if (isset($_POST["action"])) {
 			$sub_array[] = empty($row['qrcode']) ? '' :  '<a href="'.$row["qrcode"].'" class="glightbox" data-glightbox="title: '.$row['market'].';"  ><img src="'.$row["qrcode"].'" alt="image" class="img-fluid img-thumbnail" width="75" height="75"></a>';
 			
             $sub_array[] = '<button style="font-size:x-small" type="button" name="statut_button" class="  btn btn-' . $etat . '  btn-sm statut_button"  data-id="' . $row["id"] . '"data-statut="' . $row["statut"] . '">' . $row["statut"] . '</button>';
-            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"><i class="fad fa-sign-in"></i></button>';
+            $sub_array[] = '<button style="font-size:x-small"  class=" btn  btn-primary btn-sm login" data-id="'.$row['id'].'" data-gestionnaire="'.$row['gestionnaire'].'"'.securite_attributs_connexion($row['gestionnaire'], $row['id']).'><i class="fad fa-sign-in"></i></button>';
 
             $langues = ($row['multi_langue'] == '1') ? '<button style="font-size:x-small" type="button" name="language_button" class="btn  btn-sm   btn-primary  language_button" data-id="'.$row["id"].'"><i class="fad fa-language"></i></button>' : '' ;
             $sub_array[] = $langues.'<button style="font-size:x-small" type="button" name="edit_button" class=" btn  btn-warning btn-sm edit_button" data-id="' . $row["id"] . '"><i class="fad fa-edit"></i></button>';

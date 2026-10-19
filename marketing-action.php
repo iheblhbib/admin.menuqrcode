@@ -4,6 +4,9 @@ include('../config.menuqrcode/config.php');
 
 $object = new application(); 
 
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
+
 $page_actuel = $object->get_page_url();
 
 if(isset($_POST["action"]))
@@ -182,9 +185,17 @@ if(isset($_POST["action"]))
             
                 $name = $_FILES['file']['name'];
                 
+                // types autorisés uniquement (jamais de .php ou autre script exécutable)
+                $nom_sur = securite_nom_fichier($_FILES['file'], array('jpg', 'jpeg', 'png', 'webp', 'gif', 'pdf', 'mp4', 'webm', 'mov', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip'));
+                if ($_FILES['file']['error'] == UPLOAD_ERR_OK && $nom_sur === false) {
+                    securite_refuser(400, 'Type de fichier non autorisé.');
+                }
+                
                 if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
                     $tmp_name = $_FILES['file']['tmp_name'];
-                    $new_name = uniqid() . '_' . $name;
+                    // garde le nom d'origine lisible, réduit aux caractères sûrs
+                    $base = preg_replace('/[^A-Za-z0-9_-]+/', '-', pathinfo($name, PATHINFO_FILENAME));
+                    $new_name = uniqid() . '_' . trim($base, '-') . '.' . pathinfo($nom_sur, PATHINFO_EXTENSION);
                     $target_path = $upload_path . $new_name;
             
                     if (move_uploaded_file($tmp_name, $target_path)) {

@@ -2,6 +2,9 @@
 
 $object = new application(); 
 
+include_once(__DIR__ . '/../securite.php');
+securite_exiger_admin($object);
+
 $data = array();
 
 $object->query = "  SELECT DISTINCT  year , 

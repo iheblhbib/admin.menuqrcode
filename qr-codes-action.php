@@ -15,6 +15,9 @@ if (!file_exists($PNG_TEMP_DIR))
 
 $object = new application();  
 
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
+
 if (isset($_POST["action"])) {   
     
     $object->query="SELECT * FROM user WHERE pro = '1' and statut = 'Activer'";

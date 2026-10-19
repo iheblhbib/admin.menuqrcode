@@ -1067,7 +1067,7 @@ $(document).ready(function(){
   	$(document).on('click','.login',function(){
   	    var market = $(this).data('id');  
   	    var id = $(this).data('gestionnaire');  
-        $.redirect("https://app.menuqrcode.tn/redirection-admin-market", {id:id,market:market,action:'login-market'}, "POST", "_blank");    
+        $.redirect("https://app.menuqrcode.tn/redirection-admin-market", {id:id,market:market,expire:$(this).data('expire'),signature:$(this).data('signature'),action:'login-market'}, "POST", "_blank");    
   	})
   	
   	$(document).on('click','.menu-link',function(){

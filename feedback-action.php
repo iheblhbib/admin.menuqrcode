@@ -4,6 +4,9 @@ include('../config.menuqrcode/config.php'); // adapte le chemin si besoin pour l
 
 $object = new application();
 
+include_once(__DIR__ . '/securite.php');
+securite_exiger_admin($object);
+
 $page_actuel = $object->get_page_url();
 
 $rating = ['--', '1/5 😔',
