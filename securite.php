@@ -43,6 +43,23 @@ function securite_attributs_connexion($id, $market = '')
     return ' data-expire="' . $jeton['expire'] . '" data-signature="' . $jeton['signature'] . '"';
 }
 
+/*
+ * Adresse de l'espace client, pour les boutons « se connecter en tant que ».
+ * Si config.php définit MENUQR_APP_URL, on l'utilise ; sinon, en local Laragon
+ * (admin.menuqrcode.tn.test) on vise app.menuqrcode.tn.test, et en ligne app.menuqrcode.tn.
+ */
+function securite_url_espace_client()
+{
+    if (defined('MENUQR_APP_URL') && MENUQR_APP_URL !== '') {
+        return rtrim(MENUQR_APP_URL, '/');
+    }
+    $hote = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+    if (substr($hote, -5) === '.test') {
+        return 'https://app.menuqrcode.tn.test';
+    }
+    return 'https://app.menuqrcode.tn';
+}
+
 /* Arrête la requête avec un message JSON (les pages d'action sont appelées en AJAX). */
 function securite_refuser($code, $message)
 {

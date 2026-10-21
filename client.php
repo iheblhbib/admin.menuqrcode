@@ -539,7 +539,7 @@ $(document).ready(function(){
   	$(document).on('click','.login',function(){
   	    var id = $(this).data('id');  
         // expire et signature sont générés côté serveur (securite_attributs_connexion)
-        $.redirect("https://app.menuqrcode.tn/redirection-admin-login", {id:id,expire:$(this).data('expire'),signature:$(this).data('signature'),action:'login-admin'}, "POST", "_blank");    
+        $.redirect("<?= securite_url_espace_client() ?>/redirection-admin-login", {id:id,expire:$(this).data('expire'),signature:$(this).data('signature'),action:'login-admin'}, "POST", "_blank");    
   	})
  
 
